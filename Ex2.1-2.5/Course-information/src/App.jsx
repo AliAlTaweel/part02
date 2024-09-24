@@ -1,72 +1,55 @@
-import Header from "./components/Header";
-import Content from "./components/Content";
-import Total from './components/Total'
+
+import Course from "./components/Course";
 
 const App = () => {
   const course = [
     {
-      name: 'Half Stack application development',
+      name: "Half Stack application development",
       id: 1,
       parts: [
         {
-          name: 'Fundamentals of React',
+          name: "Fundamentals of React",
           exercises: 10,
-          id: 1
+          id: 1,
         },
         {
-          name: 'Using props to pass data',
+          name: "Using props to pass data",
           exercises: 7,
-          id: 2
+          id: 2,
         },
         {
-          name: 'State of a component',
+          name: "State of a component",
           exercises: 14,
-          id: 3
+          id: 3,
         },
         {
-          name: 'Redux',
+          name: "Redux",
           exercises: 11,
-          id: 4
-        }
-      ]
-    }, 
+          id: 4,
+        },
+      ],
+    },
     {
-      name: 'Node.js',
+      name: "Node.js",
       id: 2,
       parts: [
         {
-          name: 'Routing',
+          name: "Routing",
           exercises: 3,
-          id: 1
+          id: 1,
         },
         {
-          name: 'Middlewares',
+          name: "Middlewares",
           exercises: 7,
-          id: 2
-        }
-      ]
-    }
-  ]
-  const totalExercises = course.parts.reduce((sum, part) => sum + part.exercises, 0);
-
-  return (
-    <div>
-      course.map((ele)=>
-      
-      <Header course={ele.course.name} />
-      
-      
-      )
-      
-      
-    
-      {course.parts.map((part) => (
-        <Content key={part.id} part={part.name} exercises={part.exercises} />
-      ))}
-    <Total sum={totalExercises} />
-  )
-    </div>
-  );
+          id: 2,
+        },
+      ],
+    },
+  ];
+return(
+  <Course  course={course} />
+) 
+  
 };
 
 export default App;
