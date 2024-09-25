@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Persons from "./components/Persons";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
 
 const App = () => {
   const [newName, setNewName] = useState("");
@@ -33,52 +36,39 @@ const App = () => {
     setNewNum("");
   };
 
-  console.log(persons);
   const handleSerach = (event) => {
+    if (event.target.value == "") {
+      return "";
+    }
     event.preventDefault();
     const searchName = event.target.value;
-    setSearchResualt(persons.filter(person => 
-      person.name.toLowerCase().includes(event.target.value.toLowerCase())
-    ));
-  }
+    setSearchResualt(
+      persons.filter((person) =>
+        person.name.toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    );
+  };
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with <input type="text" onChange={handleSerach}/>
-      </div>
-      <h2>add a new</h2>
-      <form onSubmit={addName}>
-        <div className="name">
-          name: <input id="name" value={newName} onChange={inputChange} />
-        </div>
+      <Filter onChange={handleSerach} />
 
-        <div className="phone">
-          phone: <input id="phone" value={newNum} onChange={inputChangeNum} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <h2>add a new</h2>
+      <PersonForm
+        onSubmit={addName}
+        onChangeName={inputChange}
+        onChangeNum={inputChangeNum}
+        newName={newName}
+        newNum={newNum}
+      />
+
       <h2>Numbers</h2>
-      <ul>
-        {persons.map((person) => (
-          <li key={person.name}>
-            {person.name} {person.number}
-          </li>
-        ))}
-      </ul>
+      <Persons persons={persons} />
+
       <h2>Search Reasult</h2>
-      <ul>
-        {searchResult.map((person) => (
-          <li key={person.name}>
-            {person.name} {person.number}
-          </li>
-        ))}
-      </ul>
+      <Persons persons={searchResult} />
     </div>
   );
 };
-
 export default App;
