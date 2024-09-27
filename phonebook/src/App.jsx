@@ -9,16 +9,20 @@ const App = () => {
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
 
-  useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNotes(response.data)
-      })
-  }, [])
-  console.log("render", notes.length, "notes");
+
+  
+  const addPerson = (event) => {
+    event.preventDefault();
+    const newPerson = {
+      name: "Sam",
+      number: "0987654321",
+      id: "5",
+    };
+    axios.post("http://localhost:3001/persons", newPerson).then((response) => {
+      console.log(response);
+    });
+  };
+  addPerson;
 
   const [newName, setNewName] = useState("");
   const [newNum, setNewNum] = useState("");
